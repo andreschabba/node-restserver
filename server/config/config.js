@@ -16,7 +16,9 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe'; //Like developer
 } else {
-    urlDB = 'mongodb://cafe-user:cafe123@ds113749.mlab.com:13749/cafe'; //Like production
+    urlDB = process.env.MONGO_URL; //Like production
 }
 
 process.env.urlDB = urlDB;
+
+//heroku config:set *nombreVariable=....* TO CREATE ENVIRONMEMT VARIABLES AND TO PROTECT INFORMATION
