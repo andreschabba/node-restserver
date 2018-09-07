@@ -14,7 +14,9 @@ app.use(bodyParser.json());
 // put - actualizar registros
 // delete - cambiar el estado a no disoponible
 
-app.use(require('./routes/usuario')); //TO GET ALL THE CODE FROM THAT ROUTE
+// app.use(require('./routes/usuario')); //TO GET ALL THE CODE FROM THAT ROUTE
+// app.use(require('./routes/login'));
+app.use(require('./routes/index')); //There are all the routes to get all the code
 
 mongoose.connect(process.env.urlDB, (err, res) => { //TO CONNECT THE DB
     if (err) throw err;

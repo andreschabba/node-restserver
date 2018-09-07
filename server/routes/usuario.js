@@ -1,10 +1,12 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); //encriptar
 const _ = require('underscore');
 const Usuario = require('../models/usuario');
 const app = express();
+const { verificaToken, verificaRole } = require('../middlewares/autenticacion');
 
-app.get('/usuario', function(req, res) {
+
+app.get('/usuario', verificaToken, (req, res) => { //routa, middleware, function 
 
     let skip = req.query.skip || 0;
     skip = Number(skip);
@@ -32,7 +34,9 @@ app.get('/usuario', function(req, res) {
         });
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaRole], (req, res) => {
+
+
     let body = req.body;
 
     let usuario = new Usuario({
@@ -60,7 +64,7 @@ app.post('/usuario', function(req, res) {
 
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaRole], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role']);
 
@@ -79,7 +83,7 @@ app.put('/usuario/:id', function(req, res) {
 });
 
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaRole], (req, res) => {
     let id = req.params.id;
     //**IN THIS WAY DELETE ALL THE INFORMATION FROM THE DB**//
     // Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {

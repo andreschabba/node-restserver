@@ -9,7 +9,18 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev'; //To know if is running like developer or production.
 
 // =======================
-// BASE DE DATOS
+// EXPIRED DATE
+// =======================
+//60 SECONDS, 60 MINUTES, 24 HOURS, 30 DAYS
+process.env.EXPIRED_TOKEN_DATE = 60 * 60 * 24 * 30;
+
+// =======================
+// AUTHENTICATION SEED
+// =======================
+process.env.SEED = process.env.SEED || 'este-es-el-seed-de-desarrollo';
+
+// =======================
+// DATA BASE
 // =======================
 let urlDB;
 
