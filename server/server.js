@@ -4,6 +4,8 @@ const express = require('express'); //LOCAL SERVER
 const mongoose = require('mongoose'); //DATABASE
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path'); //paquete que trae node por defecto, crea el path de manera correcta
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -13,6 +15,8 @@ app.use(bodyParser.json());
 // post - crear nuevos registros
 // put - actualizar registros
 // delete - cambiar el estado a no disoponible
+
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 // app.use(require('./routes/usuario')); //TO GET ALL THE CODE FROM THAT ROUTE
 // app.use(require('./routes/login'));
