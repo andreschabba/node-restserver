@@ -1,12 +1,7 @@
 // =======================
-// PUERTO
+// PORT
 // =======================
 process.env.PORT = process.env.PORT || 3000;
-
-// =======================
-// ENVIRONMENT
-// =======================
-process.env.NODE_ENV = process.env.NODE_ENV || 'dev'; //To know if is running like developer or production.
 
 // =======================
 // EXPIRED DATE
@@ -18,6 +13,11 @@ process.env.EXPIRED_TOKEN_DATE = 60 * 60 * 24 * 30;
 // AUTHENTICATION SEED
 // =======================
 process.env.SEED = process.env.SEED || 'este-es-el-seed-de-desarrollo';
+
+// =======================
+// ENVIRONMENT
+// =======================
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev'; //To know if is running like developer or production.
 
 // =======================
 // DATA BASE

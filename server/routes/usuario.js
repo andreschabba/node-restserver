@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt'); //encriptar
 const _ = require('underscore');
-const Usuario = require('../models/usuario');
+const Usuario = require('../models/usuario'); //My Schema
 const app = express();
 const { verificaToken, verificaRole } = require('../middlewares/autenticacion');
 
@@ -13,10 +13,10 @@ app.get('/usuario', verificaToken, (req, res) => { //routa, middleware, function
     let limit = req.query.limit || 5;
     limit = Number(limit);
 
-    Usuario.find({ status: true }, 'name email role status google img')
+    Usuario.find({ status: true }, 'name email role status google img') //Puedes excluir los campos que quieras 
         .skip(skip)
         .limit(limit)
-        .exec((err, usuarios) => {
+        .exec((err, users) => {
             if (err) {
                 return res.status(400).json({
                     ok: false,
@@ -27,7 +27,7 @@ app.get('/usuario', verificaToken, (req, res) => { //routa, middleware, function
             Usuario.count({ status: true }, (err, total) => {
                 res.json({
                     ok: true,
-                    usuarios,
+                    users,
                     total
                 });
             });
@@ -92,12 +92,16 @@ app.delete('/usuario/:id', [verificaToken, verificaRole], (req, res) => {
     //             ok: false,
     //             err
     //         });
-    //     }
+    //     };
+    //      res.json({
+    //     ok: true, 
+    //     usuario: usuarioBorrado
+    // });
     let newStatus = {
         status: false
     };
     //HERE JUST CHANGE THE STATUS
-    Usuario.findByIdAndUpdate(id, newStatus, { new: true, runValidators: true }, (err, usuarioBorrado) => {
+    Usuario.findByIdAndUpdate(id, newStatus, { new: true }, (err, usuarioBorrado) => {
         if (err) {
             return res.status(400).json({
                 ok: false,

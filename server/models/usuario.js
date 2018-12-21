@@ -54,4 +54,5 @@ usuarioSchema.plugin(uniqueValidator, {
     message: '{PATH} must be unique'
 })
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+//User is the name i use to identify my schema(usuarioSchema)
+module.exports = mongoose.model('User', usuarioSchema);
