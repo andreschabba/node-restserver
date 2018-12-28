@@ -9,37 +9,37 @@ const app = express();
 app.post('/login', (req, res) => {
     let body = req.body;
 
-    Usuario.findOne({ email: body.email }, (err, usuarioDB) => {
+    Usuario.findOne({ email: body.email }, (err, userDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         }
-        if (!usuarioDB) {
+        if (!userDB) {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: '*Usuario o contraseña incorrecto'
+                    message: '1User or password wrong'
                 }
             });
         }
-        if (!bcrypt.compareSync(body.password, usuarioDB.password)) {
+        if (!bcrypt.compareSync(body.password, userDB.password)) {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Usuario o *contraseña incorrecto'
+                    message: 'User or 1passwod wrong'
                 }
             });
         }
 
         let token = jwt.sign({
-            usuario: usuarioDB
+            user: userDB
         }, process.env.SEED, { expiresIn: process.env.EXPIRED_TOKEN_DATE });
 
         res.json({
             ok: true,
-            user: usuarioDB,
+            user: userDB,
             token
         });
     });
@@ -74,15 +74,15 @@ app.post('/google', async(req, res) => {
             });
         });
 
-    Usuario.findOne({ email: googleUser.email }, (err, usuarioDB) => {
+    Usuario.findOne({ email: googleUser.email }, (err, userDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         };
-        if (usuarioDB) {
-            if (usuarioDB.google == false) {
+        if (userDB) {
+            if (userDB.google == false) {
                 return res.status(400).json({
                     ok: false,
                     err: {
@@ -91,16 +91,16 @@ app.post('/google', async(req, res) => {
                 });
             } else {
                 let token = jwt.sign({
-                    user: usuarioDB
+                    user: userDB
                 }, process.env.SEED, { expiresIn: process.env.EXPIRED_TOKEN_DATE });
 
                 return res.json({
                     ok: true,
-                    user: usuarioDB,
+                    user: userDB,
                     token
                 })
             }
-        } else {
+        } else { //if the user doesnt exist in the data base (new user)
             let user = new Usuario();
 
             user.name = googleUser.name;
@@ -109,7 +109,7 @@ app.post('/google', async(req, res) => {
             user.google = true;
             user.password = ':)';
 
-            user.save((err, usuarioDB) => {
+            user.save((err, userDB) => {
                 if (err) {
                     return res.status(500).json({
                         ok: false,
@@ -118,7 +118,7 @@ app.post('/google', async(req, res) => {
                 };
 
                 let token = jwt.sign({
-                    user: usuarioDB
+                    user: userDB
                 }, process.env.SEED, { expiresIn: process.env.EXPIRED_TOKEN_DATE });
 
                 return res.json({

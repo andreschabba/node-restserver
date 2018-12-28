@@ -15,7 +15,7 @@ let verificaToken = (req, res, next) => { //si no se ejecuta el next, se queda e
                 err
             })
         }
-        req.usuario = deocoded.usuario;
+        req.user = deocoded.user;
         next();
     });
 };
@@ -25,7 +25,7 @@ let verificaToken = (req, res, next) => { //si no se ejecuta el next, se queda e
 // =======================
 
 let verificaRole = (req, res, next) => {
-    let role = req.usuario.role;
+    let role = req.user.role;
 
     if (role === 'ADMIN_ROLE') {
         next();
