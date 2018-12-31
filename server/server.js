@@ -6,6 +6,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path'); //paquete que trae node por defecto, crea el path de manera correcta
 
+//INICIAR CONEXION A BASE DE DATOS
+//"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath="c:\data\db"
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json

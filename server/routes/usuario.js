@@ -92,10 +92,11 @@ app.delete('/usuario/:id', [verificaToken, verificaRole], (req, res) => {
     //             ok: false,
     //             err
     //         });
-    //     };
-    //      res.json({
-    //     ok: true, 
-    //     usuario: usuarioBorrado
+    //     }
+    //     res.json({
+    //          ok: true, 
+    //          usuario: usuarioBorrado
+    //      )};
     // });
     let newStatus = {
         status: false

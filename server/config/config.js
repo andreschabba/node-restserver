@@ -6,8 +6,7 @@ process.env.PORT = process.env.PORT || 3000;
 // =======================
 // EXPIRED DATE
 // =======================
-//60 SECONDS, 60 MINUTES, 24 HOURS, 30 DAYS
-process.env.EXPIRED_TOKEN_DATE = 60 * 60 * 24 * 30;
+process.env.EXPIRED_TOKEN_DATE = '48h';
 
 // =======================
 // AUTHENTICATION SEED
