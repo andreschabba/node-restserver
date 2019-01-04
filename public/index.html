@@ -11,7 +11,10 @@
 </head>
 
 <body>
+    <!-- <img src="http://localhost:3000/image/products/5c2e59bbba1aa2368866aa42-553.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwic3RhdHVzIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1YzIxM2FkMDk4NmRiMTNkMzhjOGZkNDUiLCJuYW1lIjoiVGVzdDEiLCJlbWFpbCI6InRlc3QxQGdtYWlsLmNvbSIsIl9fdiI6MH0sImlhdCI6MTU0NjUzODI5MSwiZXhwIjoxNTQ2NzExMDkxfQ.tLzvnRPCSc1rqDdtSLshIpGIz4p3NPZ8j0S0ZsXV-gM"alt=""> -->
+
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
     <a href="#" onclick="signOut();">Sign out</a>
     <script>
         function signOut() {
@@ -20,7 +23,7 @@
                 console.log('User signed out.');
             });
         }
-    
+
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.

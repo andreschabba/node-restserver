@@ -41,7 +41,28 @@ let verificaRole = (req, res, next) => {
 
 }
 
+
+// =======================
+// VERIFICAR TOKEN IMG
+// =======================
+
+let verificaImgToken = (req, res, next) => {
+    let token = req.query.token;
+
+    jwt.verify(token, process.env.SEED, (err, deocoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err
+            })
+        }
+        req.user = deocoded.user;
+        next();
+    });
+};
+
 module.exports = {
     verificaToken,
-    verificaRole
+    verificaRole,
+    verificaImgToken
 }
